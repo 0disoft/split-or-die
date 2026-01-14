@@ -1,0 +1,174 @@
+{
+  "name": "split-or-die",
+  "displayName": "Split or Die",
+  "description": "Enforce smaller, modular files by flagging oversized or complex code.",
+  "publisher": "0disoft",
+  "version": "1.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0disoft/split-or-die"
+  },
+  "engines": {
+    "vscode": "^1.104.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "icon": "media/icon.png",
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "splitOrDie",
+          "title": "Split or Die",
+          "icon": "resources/split-or-die-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "splitOrDie": [
+        {
+          "id": "splitOrDie.panel",
+          "name": "Split or Die",
+          "type": "webview",
+          "icon": "resources/split-or-die-icon.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "split-or-die.scanWorkspace",
+        "title": "Split or Die: Scan Workspace"
+      },
+      {
+        "command": "split-or-die.excludeFolder",
+        "title": "Split or Die: Exclude Folder from Scan"
+      },
+      {
+        "command": "split-or-die.toggleFolder",
+        "title": "Split or Die: Toggle Folder Exclusion"
+      },
+      {
+        "command": "split-or-die.excludeFile",
+        "title": "Split or Die: Exclude File from Scan"
+      },
+      {
+        "command": "split-or-die.toggleExtension",
+        "title": "Split or Die: Toggle Extension Exclusion"
+      },
+      {
+        "command": "split-or-die.toggleFile",
+        "title": "Split or Die: Toggle File Exclusion"
+      },
+      {
+        "command": "split-or-die.includeFolder",
+        "title": "Split or Die: Include Folder in Scan"
+      },
+      {
+        "command": "split-or-die.includeFile",
+        "title": "Split or Die: Include File in Scan"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "split-or-die.toggleFile",
+          "when": "!explorerResourceIsFolder",
+          "group": "navigation@101"
+        },
+        {
+          "command": "split-or-die.toggleExtension",
+          "when": "!explorerResourceIsFolder",
+          "group": "navigation@102"
+        },
+        {
+          "command": "split-or-die.toggleFolder",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation@100"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Split or Die",
+      "properties": {
+        "splitOrDie.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Split or Die diagnostics."
+        },
+        "splitOrDie.sizeThresholdKb": {
+          "type": "number",
+          "default": 20,
+          "minimum": 1,
+          "description": "Files larger than this size (KB) are reported."
+        },
+        "splitOrDie.runOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run a workspace scan when VS Code finishes starting."
+        },
+        "splitOrDie.runOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check the saved file and update diagnostics."
+        },
+        "splitOrDie.excludeGlobs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "**/node_modules/**",
+            "**/.git/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/.svelte-kit/**",
+            "**/.vite/**",
+            "**/coverage/**",
+            "**/__snapshots__/**",
+            "**/paraglide/**"
+          ],
+          "description": "Glob patterns to exclude from workspace scans."
+        },
+        "splitOrDie.excludeExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "md",
+            "txt",
+            "yaml",
+            "yml",
+            "toml",
+            "json"
+          ],
+          "description": "File extensions to ignore (without leading dot)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "node --stack_size=65500 ./node_modules/typescript/lib/tsc.js -p ./",
+    "watch": "node --stack_size=65500 ./node_modules/typescript/lib/tsc.js -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "1.104.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.52.0",
+    "eslint": "^9.39.2",
+    "typescript": "5.8.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
