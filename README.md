@@ -38,9 +38,7 @@ This extension contributes the following settings:
 
 ## Release Notes
 
-### 1.0.2
+### 1.0.3
 
-- Activity Bar controls for size threshold and exclusions.
-- Actual line counts in diagnostics and lists.
-- Explorer context menu actions for files, folders, and extensions.
-- Logo/icon size optimized.
+- Added more non-code default exclusions (sqlite/jsonc/dotfiles).
+- Internal refactor to split large extension modules.
