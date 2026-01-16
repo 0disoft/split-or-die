@@ -38,6 +38,10 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.0.4
+
+- Fix packaging allowlist so all compiled modules are included.
+
 ### 1.0.3
 
 - Added more non-code default exclusions (sqlite/jsonc/dotfiles).

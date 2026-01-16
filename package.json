@@ -3,15 +3,15 @@
   "displayName": "Split or Die",
   "description": "Enforce smaller, modular files by flagging oversized or complex code.",
   "publisher": "0disoft",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/0disoft/split-or-die"
   },
   "files": [
-    "out/extension.js",
-    "out/extension.js.map",
+    "out/*.js",
+    "out/*.js.map",
     "resources/**",
     "media/**",
     "package.json",
@@ -319,7 +319,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "1.104.0",
+    "@types/vscode": "1.96.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "typescript-eslint": "^8.52.0",
