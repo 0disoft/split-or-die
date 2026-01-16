@@ -173,7 +173,7 @@ export async function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  const saveListener = vscode.workspace.onDidSaveTextDocument(async (doc) => {
+  const saveListener = vscode.workspace.onDidSaveTextDocument(async (doc: vscode.TextDocument) => {
     const config = readConfig();
     if (!config.enabled || !config.runOnSave) {
       return;
@@ -185,12 +185,12 @@ export async function activate(context: vscode.ExtensionContext) {
     await updateContextForUri(context, config, doc.uri);
   });
 
-  const editorListener = vscode.window.onDidChangeActiveTextEditor((editor) => {
+  const editorListener = vscode.window.onDidChangeActiveTextEditor((editor: vscode.TextEditor | undefined) => {
     const config = readConfig();
     void updateContextForUri(context, config, editor?.document.uri);
   });
 
-  const configListener = vscode.workspace.onDidChangeConfiguration((event) => {
+  const configListener = vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
     if (!event.affectsConfiguration('splitOrDie')) {
       return;
     }

@@ -6,6 +6,10 @@
 		"lib": [
 			"ES2022"
 		],
+		"types": [
+			"node",
+			"vscode"
+		],
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"rootDir": "src",
